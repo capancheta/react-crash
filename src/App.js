@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
+import Header from './components/hearder';
+import Cart from './components/cart';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor(){
+    super();
+    this.cart = React.createRef()
+  }
+
+  addItem = (name) => {
+    if (!name) return;
+    this.cart.current.addItem(name)
+  }
+
+  render(){
+    return (
+      <div>
+        <Header onAddItem={this.addItem}/>
+        <Cart ref={this.cart}/>
+      </div>
+
+      );
+    }
+
 }
-
+ 
 export default App;
+
+
